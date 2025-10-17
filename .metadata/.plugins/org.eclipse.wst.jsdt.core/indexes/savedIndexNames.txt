@@ -1,0 +1,2 @@
+INDEX VERSION 1.4+D:\DEVOPS-PRACTICE\BACKEND\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+2348875372.index
