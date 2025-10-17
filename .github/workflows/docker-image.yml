@@ -1,18 +1,24 @@
-name: Docker Fullstack CI
+name: Docker Fullstack CI/CD
 
 on:
   push:
     branches:
       - main
   pull_request:
+    branches:
+      - main
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
 
+    env:
+      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+
     steps:
       # Checkout source code
-      - name: Checkout source code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       # Set up Docker Buildx
@@ -40,6 +46,6 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: ./HOTELMANGEMENTAPI-REACT
-          file: ./HOTELMANGEMENTAPI-REACT/Dockerfile
+          file: ./HOTELMANGEMENTAPI-REACT/frontend.Dockerfile
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/docker-frontend:latest
